@@ -634,6 +634,7 @@ a .content::after {
     height: 100%;
     position: relative;
     float: left;
+    margin: 0;
 }
 
 @media (max-width: 530px) {
@@ -826,8 +827,12 @@ a .content::after {
 .header__air {
     float: right;
     border-left: 1px solid rgb(36, 131, 197);
-    padding: 15px 16px 0px;
-    height: 49px;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
 }
 
 @media (max-width: 530px) {
@@ -1624,6 +1629,14 @@ a .content::after {
     text-align: left ! important;
 }
 
+.article__text ul {
+
+}
+
+.article__text ul li {
+    padding: 4px 0;
+}
+
 .article__text a {
     text-decoration: underline;
     color: rgb(0, 149, 218);
@@ -1631,7 +1644,7 @@ a .content::after {
 
 .article__text b,
 .article__text strong {
-    font-weight: ;
+    font-weight: bold;
 }
 
 @media (max-width: 530px) {
@@ -1721,7 +1734,7 @@ a .content::after {
     content: "";
     border-width: 1px 1px 1px medium;
     border-style: solid solid solid none;
-    border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(204, 204, 204) -moz-use-text-color;
+    border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(204, 204, 204);
     -moz-border-top-colors: none;
     -moz-border-right-colors: none;
     -moz-border-bottom-colors: none;
@@ -1766,7 +1779,7 @@ a .content::after {
     content: "";
     border-width: 1px 1px 1px medium;
     border-style: solid solid solid none;
-    border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(204, 204, 204) -moz-use-text-color;
+    border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(204, 204, 204);
     -moz-border-top-colors: none;
     -moz-border-right-colors: none;
     -moz-border-bottom-colors: none;
