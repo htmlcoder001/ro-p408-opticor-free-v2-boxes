@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Благодарим ви! Вашата поръчка е приета!</title>
+    <title>¡Gracias! Su pedido ha sido aceptado.</title>
     <link rel="stylesheet" href="ths.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
@@ -16,43 +16,43 @@
       <div class="header">
         <div class="title">
           <span class="main-title">
-		  Благодарим ви!
+		  ¡Gracias!
 		  </span><br />
-          Вашата поръчка <br>е приета!
+          Su pedido ha <br>sido aceptado.
         </div>
         <span>
-		Очаквайте скоро наш консултант да Ви се обади за потвърждаване.
+		Pronto el operador se pondrá en contacto con usted para confirmar la orden.
         </span>
       </div>
 
       <div class="form">
-        <p>Моля, проверете правилността на въведините данни.</p>
+        <p>Por favor, compruebe la exactitud de los datos introducidos.</p>
         <div class="form-wrap">
           <div class="wrap-input">
             <div class="input">
-              <label for="name">Име</label>
+              <label for="name">Nombre</label>
               <div><?php echo ($data["name"])?></div>
             </div>
             <div class="input">
-              <label for="name">Телефон</label>
+              <label for="name">Teléfono</label>
               <div><?php echo ($data["phone"])?></div>
             </div>
           </div>
           <button type="button" onclick="{showForm()}" id="hideButton">
-            Променете данните
+            Editar datos
           </button>
 
           <form
             class="hidden-form" id="form" method="post"
-             geo="bg" action="api.php" 
-	onsubmit="return validate_form(this, 'Моля, въведете коректен номер телефона');"
+             geo="es" action="api.php" 
+	onsubmit="return validate_form(this, 'Por favor ingrese un número de teléfono válido');"
 			>
 			
-            <input type="text" name="name" required="" placeholder="Име" />
+            <input type="text" name="name" required="" placeholder="Nombre" />
 
-            <input type="tel" name="phone" required="" placeholder="Телефон" id="phone"/>
+            <input type="tel" name="phone" required="" placeholder="Teléfono" />
 
-            <button type="submit">Променете данните</button>
+            <button type="submit">Editar datos</button>
 
             <input name="subid" type="hidden" value="{subid}" />
             <input name="px" type="hidden" value="{px}" />
@@ -61,7 +61,6 @@
         </div>
       </div>
     </div>
-	
 
   <script>
     const showForm = () => {
@@ -72,132 +71,137 @@
     };
   </script>
 
+<script>
+		var phonePattern = {
+			'ru': '+7 (___) ___-__-__',
+			'ua': '+38-___-___-__-__',
+			'by': '+375 ___ ___ ___',
+			'kz': '+7 ___ ___ ____',
+			'kg': '+___ ___ __ __ __',
+			'md': '0 ___ _____',
+			'az': '+___-__-___-__-__',
+			'ge': '+995 ___ __ __ __',
+			'es': '+34 ___ __ __ __',
+			'pe': '+51 ___ ___ _?_',
+			'cl': '+56 _ ____ ____',
+			'ar': '+54 __ ____ ____',
+			'co': '+57 _______??_',
+			'mx': '+52 __ ____ ____',
+			'it': '+39-___-___-____',
+			'esp': '+34 ___ __ __ __',
+			'pt': '+351 ___ ___ ___',
+			'prt': '+351 ___ ___ ___',
+			'id': '+62 ___ ___ ___',
+			'gr': '+30 ___ _______',
+			'cy': '+357 __ ______',
+			'ro': '+40 ___ ___ __? _',
+			'bg': '+359 ___ __ __? _',
+			'cz': '+420 ___ ___ ___',
+			'sk': '+421 ___ ___ ___',
+			'si': '+386 _ ___ __ __',
+			'pl': '+48 ___ ___ ___',
+			'al': '+355 __ ___ ___?_',
+			'rs': '+381 __ _____?_',
+			'ph': '+63 _ ____ __?_',
+			'hu': '+36 _ ___ ____',
+			'hr': '+385 _ ____ __?_',
+			'ba': '+387 __ ______',
+			/* --- */
+		}
 
-<script src="jquery.maskedinput.min.js"></script>
-    <script>
-        $(function()
-        {
-            $('#phone').on('change',function () {
-                var phone = $(this).val();
-                phone = phone.replace('0','');
+		const inputs = document.querySelectorAll('form input[name="phone"]')
 
-                while(phone.charAt(0) === '0')
-                {
-                    phone = phone.substr(1);
-                }
 
-                $(this).val(phone);
-            });
-            
-            $.mask.definitions['9'] = '';
-            $.mask.definitions['d'] = '[0-9]';
+		//функция на проверку соответствия количества введенных в инпут символов, количеству необходимых в маске
+		function validate_form(form, alert_text = "Please enter valid phone number") {
+			var input_ln = form.querySelector('input[name="phone"]').value.replace(/ /g, '').length,
+				pattern_ln = phonePattern[form.getAttribute('geo')].replace(/\?| /g, '').length;
+			if (input_ln >= pattern_ln) return true;
+			else { alert(alert_text); return false; }
+		}
 
-            var theLanguage = $('html').attr('lang');
+		//сама маска, срабатывающая от ивентов ввода, фокуса, потери фокуса и нажатия кнопки мыши
+		document.addEventListener("DOMContentLoaded", function () {
 
-            if(theLanguage == 'ru')
-            {
-                $("input[type=tel]").mask("+7 (ddd) ddd-dd-dd");
-            } else if (theLanguage == 'ua')
-            {
-                $("input[type=tel]").mask("+38-ddd-ddd-dd-dd");
-            } else if (theLanguage == 'by')
-            {
-                $("input[type=tel]").mask("+375 ddd-ddd-ddd");
-            } else if (theLanguage == 'kz')
-            {
-                $("input[type=tel]").mask("+7 ddd ddd dddd");
-            } else if (theLanguage == 'kg')
-            {
-                $("input[type=tel]").mask("+ddd ddd dd-dd-dd");
-            } else if (theLanguage == 'md')
-            {
-                $("input[type=tel]").mask("0 ddd ddddd");
-            } else if (theLanguage == 'az')
-            {
-                $("input[type=tel]").mask("+ddd-dd-ddd-dd-dd");
-            } else if (theLanguage == 'ge')
-            {
-                $("input[type=tel]").mask("+995 ddd dd-dd-dd");
-            } else if (theLanguage == 'es')
-            {
-                $("input[type=tel]").mask("+34 ddd dd dd dd");
-            } else if (theLanguage == 'pe')
-            {
-                $("input[type=tel]").mask("+51 ddd ddd ddd");
-            } else if (theLanguage == 'cl')
-            {
-                $("input[type=tel]").mask("+56 d dddd dddd");
-            } else if (theLanguage == 'ar')
-            {
-                $("input[type=tel]").mask("+54 dd dddd dddd");
-            } else if (theLanguage == 'co')
-            {
-                $("input[type=tel]").mask("+57 ddd ddd dddd");
-            } else if (theLanguage == 'mx')
-            {
-                $("input[type=tel]").mask("+52 dd dddd dddd");
-            } else if (theLanguage == 'it')
-            {
-                $("input[type=tel]").mask("+39 ddd-ddd-dddd");
-            } else if (theLanguage == 'esp')
-            {
-                $("input[type=tel]").mask("+34 ddd dd dd dd");
-            } else if (theLanguage == 'pt')
-            {
-                $("input[type=tel]").mask("+351 ddd ddd ddd");
-            } else if (theLanguage == 'prt')
-            {
-                $("input[type=tel]").mask("+351 ddd ddd ddd");
-            } else if (theLanguage == 'id')
-            {
-                $("input[type=tel]").mask("+62 ddd ddd ddd");
-            } else if (theLanguage == 'gr')
-            {
-                $("input[type=tel]").mask("+30 ddd ddddddd");
-            } else if (theLanguage == 'cy')
-            {
-                $("input[type=tel]").mask("+357 dd dddddd");
-            } else if (theLanguage == 'ro')
-            {
-                $("input[type=tel]").mask("+40 ddd ddd dd dd");
-            } else if (theLanguage == 'bg')
-            {
-                $("input[type=tel]").mask("dddd dd ddd d?d");
-            } else if (theLanguage == 'cz')
-            {
-                $("input[type=tel]").mask("+420 ddd ddd ddd");
-            } else if (theLanguage == 'sk')
-            {
-                $("input[type=tel]").mask("+421 ddd ddd ddd");
-            } else if (theLanguage == 'si')
-            {
-                $("input[type=tel]").mask("+386 d ddd dd dd");
-            } else if (theLanguage == 'pl')
-            {
-                $("input[type=tel]").mask("+48 ddd ddd ddd");
-            } else if (theLanguage == 'al')
-            {
-                $("input[type=tel]").mask("+355 dd ddd dddd");
-            } else if (theLanguage == 'rs')
-            {
-                $("input[type=tel]").mask("+381 dd ddddd-dd");
-            } else if (theLanguage == 'ph')
-            {
-                $("input[type=tel]").mask("+63 d dddd dd-dd");
-            } else if (theLanguage == 'hu')
-            {
-                $("input[type=tel]").mask("+36 d ddd dddd");
-            } else if (theLanguage == 'hr')
-            {
-                $("input[type=tel]").mask("+385 d dddd dd-dd");
-            } else if (theLanguage == 'ba')
-            {
-                $("input[type=tel]").mask("+387 dd dddddd");
-            }
-        });
+			var isTimeoutSeted = false;
+			var inputInterval;
 
-    </script>
-	
+			function createInterval(input) {
+				if (!isTimeoutSeted) {
+					isTimeoutSeted = true;
+
+					inputInterval = setInterval(() => {
+						input.selectionStart = input.value.length
+						input.setSelectionRange(input.value.length, input.value.length);
+					}, 15)
+				}
+			}
+
+			function deleteInterval() {
+				clearInterval(inputInterval)
+				isTimeoutSeted = false;
+			}
+
+			function setSelectionStart(input) {
+				input.selectionStart = input.value.length
+			}
+
+			function mask(event) {
+				var input = event.currentTarget;
+				var geo = input.form.getAttribute('geo');
+				var matrix = phonePattern[geo];
+				var i = 0;
+				var def = matrix.replace(/\D/g, "");
+				var val = input.value.replace(/\D/g, "");
+
+				if (!event.type == "blur") {
+					setSelectionStart(input)
+				}
+
+				// Ставим интервал для инпута
+				createInterval(input)
+
+				if (event.type == "blur") {
+					// Сбрасываем интервал для инпута
+					deleteInterval()
+					if (input.value.length == 2) {
+						input.value = ""
+					}
+				}
+
+				if (def.length >= val.length) {
+					val = def
+				};
+
+				input.value = matrix.replace(/./g, function (a) {
+					return /[_|?\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a
+				});
+
+
+			};
+
+			inputs.forEach(input => {
+				input.addEventListener("input", mask, false);
+				input.addEventListener("blur", mask, false);
+				input.addEventListener("focus", mask, false);
+			})
+		});
+
+		$(document).ready(function () {
+			// Load GDPR
+			$(document).gdprCookieLaw({
+				moreLinkHref: '/privacypolicy',
+				theme: 'theme-1',
+				position: 'bottom-right',
+				width: '760px',
+				margin: '15px',
+				animation: 'fade-slide',
+				btnAcceptText: 'Ok'
+			});
+		});
+
+</script>
+
   </body>
 
 </html>

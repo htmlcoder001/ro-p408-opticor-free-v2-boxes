@@ -798,34 +798,34 @@
 .animated.animated.bounceIn,
 .animated.animated.flipOutX,
 .animated@-webkit-keyframes bounce {
-    0%,
-    100%,
-    20%,
-    53%,
-    80% {
-        -webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);
-        animation-timing-function: cubic-bezier(.215, .61, .355, 1);
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0)
-    }
-    40%,
-    43% {
-        -webkit-animation-timing-function: cubic-bezier(.755, .050, .855, .060);
-        animation-timing-function: cubic-bezier(.755, .050, .855, .060);
-        -webkit-transform: translate3d(0, -30px, 0);
-        transform: translate3d(0, -30px, 0)
-    }
-    70% {
-        -webkit-animation-timing-function: cubic-bezier(.755, .050, .855, .060);
-        animation-timing-function: cubic-bezier(.755, .050, .855, .060);
-        -webkit-transform: translate3d(0, -15px, 0);
-        transform: translate3d(0, -15px, 0)
-    }
-    90% {
-        -webkit-transform: translate3d(0, -4px, 0);
-        transform: translate3d(0, -4px, 0)
-    }
-}
+             0%,
+             100%,
+             20%,
+             53%,
+             80% {
+                 -webkit-animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+                 animation-timing-function: cubic-bezier(.215, .61, .355, 1);
+                 -webkit-transform: translate3d(0, 0, 0);
+                 transform: translate3d(0, 0, 0)
+             }
+             40%,
+             43% {
+                 -webkit-animation-timing-function: cubic-bezier(.755, .050, .855, .060);
+                 animation-timing-function: cubic-bezier(.755, .050, .855, .060);
+                 -webkit-transform: translate3d(0, -30px, 0);
+                 transform: translate3d(0, -30px, 0)
+             }
+             70% {
+                 -webkit-animation-timing-function: cubic-bezier(.755, .050, .855, .060);
+                 animation-timing-function: cubic-bezier(.755, .050, .855, .060);
+                 -webkit-transform: translate3d(0, -15px, 0);
+                 transform: translate3d(0, -15px, 0)
+             }
+             90% {
+                 -webkit-transform: translate3d(0, -4px, 0);
+                 transform: translate3d(0, -4px, 0)
+             }
+         }
 
 @keyframes bounce {
     0%,
@@ -947,16 +947,16 @@
     animation-name: bounceIn;
 }
 
-.la-ball-fall,
-.visible {
+#content .la-ball-fall,
+#content .visible {
     display: block
 }
 
-.opentry {
+#content .opentry {
     display: none;
 }
 
-.order_block {
+#content .order_block {
     display: none;
 }
 
